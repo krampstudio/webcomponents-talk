@@ -2,6 +2,16 @@
 
 ## Web development is a hack, semantic is a lie
 
+ Developing web site and web app is hard. Perpetual problems:
+  - maintanbility 
+  - style consistency
+  - 3rd part tools integration
+  - productivity
+ 
+ Let see how some examples I had to deal with in my carrier
+
+
+
 ```html
 <CENTER><FONT size=+4>
     <A href="javascript:void(0); alert('ok');">
@@ -49,6 +59,21 @@ if ("INPUT"==event.srcElement.tagName)
 ```
 
 ```html
+<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script>
+$(document).ready(function(){
+   for ( var i = 0; i < 10; i++){
+      $('#container').append($('<div class="item" id="item-' + i +'"> Item ' + i + '</div>'));
+   }
+   $('.item').click(function(){
+       alert('Select item ' + $(this).attr('id').replace('item-', ''));
+   });
+});
+</script>
+<div id="container"></div>
+```
+
+```html
 <div class="btn-group">
   <button type="button" class="btn btn-danger">Action</button>
   <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -75,11 +100,21 @@ if ("INPUT"==event.srcElement.tagName)
 
 ```html
 <div class="container"></div>
+<script type="text/babel">
+  ReactDOM.render(
+    <a>Hello, world!</a>,
+    document.getElementById('container')
+  );
+</script>
 ```
+
+## Web components to save our soul
 
 ```html
 <ks-button>Click me</ks-button>
 ```
+
+A mail reader ?
 
 ```html
 <header>
@@ -102,4 +137,140 @@ if ("INPUT"==event.srcElement.tagName)
     <mail-button-new></mail-button-new>
 </main>
 ```
+
+A real example : my unmaintaned web blog [krampstudio.com](http://krampstudio.com/en/index.html)
+
+
+## By the way, what are exactly _Web Components_
+
+
+The gang of 4 w3c specs Google is pushing for (the Google / Polymer point of view)
+ - Custom Element  - Shadow DOM
+ - HTML Templates  - HTML Impports
+
+But this is not the only way
+
+### Custom element
+
+ - Define new DOM elements
+
+```js
+document.registerElement('x-cow', {
+   prototype : Object.create(HTMLElement.prototype)
+});
+```
+
+```
+<x-cow></x-cow>
+```
+ 
+ - Extend existing elements
+
+```js
+document.registerElement('x-cow', {
+   prototype : Object.create(HTMLAnchorElement.prototype)
+});
+```
+
+```
+<a is="x-cow" href="#moo"></a>
+```
+
+ - Element attributes and methods
+
+```js
+const species = new Set('holstein', 'abondance', 'limousine');
+const xCowPrototype = Object.create(HTMLElement.prototype,{
+   specy : {
+      get(){
+         let current =  this.getAttribute('specy');
+         if(!current || species.has(current)){
+             return 'holstein';
+         }
+         return current;
+      },
+      set(val){
+         if(species.has(val)){
+             this.setAttribute('specy', val);
+         }
+      }
+   }
+   moo : {
+      value(){
+         console.log(this.id + ' does a ' + this.specy + ' moo ');
+      }
+   }
+});
+document.registerElement('x-cow', {
+   prototype : xCowPrototype
+});
+```
+
+```html
+<x-cow id="cow-1"></x-cow>
+<x-cow id="cow-2" specy="abondance"></x-cow>
+```
+
+```js
+for( let cow of document.querySelecotorAll('x-cow')){
+  cow.moo();
+}
+```
+
+see Object.create and Object.defineProperties
+
+
+ - Lifecycle 
+ 
+```js
+const xCowPrototype = Object.create(HTMLElement.prototype);
+xCowPrototype.createdCallback = function(){
+   console.log('A' + this.getAttribute('specy') + ' moo ');
+};
+document.registerElement('x-cow', {
+   prototype : xCowPrototype
+});
+```
+
+```html
+<x-cow specy="abondance"></x-cow>
+```
+
+ createdCallback, attachedCallback, detachedCallback, attributeChangedCallback
+ 
+
+### Shadow dom
+
+ - Hide a part of the DOM
+ - Scope CSS
+
+###  HTML Template
+
+- Standardize client side template
+
+### HTML Import
+
+- Import a part of the DOM and it's assets 
+
+
+- html import / ES2015 module
+
+How to load an element and his assets
+
+Vendors war
+Google wants HTML imports
+Mozilla prefer to rely on ES
+
+- CSS scopes
+
+
+
+- css decorators
+
+
+
+- css variables
+
+- http2
+
 
