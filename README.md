@@ -241,36 +241,90 @@ document.registerElement('x-cow', {
 
 ### Shadow dom
 
- - Hide a part of the DOM
- - Scope CSS
+ - Hide a part of the DOM and scope styles
+ 
+```html
+<p id="hostElement"></p>
+<script>
+  // Create shadow DOM
+  var shadow = document.querySelector('#hostElement').createShadowRoot();
+  // Add some text to shadow DOM
+  shadow.innerHTML = '<p>Here is some new text</p>';
+  // Add some CSS to make the text red
+  shadow.innerHTML += '<style>p { color: red };</style>';
+</script>
+```
 
 ###  HTML Template
 
-- Standardize client side template
+- Standardize client side templates
+
+```html
+<template id="menu-item-tpl">
+   <li><a href="#"></a></li>
+</template>
+<ul id="menu"></ul>
+```
+
+```js
+const items = ['foo', 'bar', 'baz'];
+const menuELt = document.querySelector('#menu');
+const tplELt = document.querySelector('#menu-item-tpl');
+items.forEach( item => {
+    let clone = document.importNode(tplELt.content, true);
+    let a = clone.querySelector('a')
+    a.textContent(item);
+    a.href = "#" + item;
+    menuELt.appendChild(clone);
+});
+```
 
 ### HTML Import
 
 - Import a part of the DOM and it's assets 
 
+```html
+<link rel="import" href="aComponent.html">
+```
 
-- html import / ES2015 module
+### All together
 
-How to load an element and his assets
+EXAMPLE
 
-Vendors war
-Google wants HTML imports
-Mozilla prefer to rely on ES
+## Early implementation  
 
-- CSS scopes
+### Polymer
 
+- declarative approach 
+- polyfill + util + everything is a web component
 
+EXAMPLE
 
-- css decorators
+### X-tag
 
+ - custom element only 
+ 
+### Bosonic
 
+ - 100% w3c then transpiling to old school
+ 
+## The hangover
 
-- css variables
+Vendors implementation nightmare
+Google wants HTML imports / Mozilla prefers ES2015 modules
+The polyfills doesn't really work 
+Shadow DOM is difficult to implement (HTML Import even more)
+The reality has caught up the fantasy : React
 
-- http2
+## A new hope
 
+In the last monthes
+- Polymer 1.0
+- Bosonic revival
+- FirefoxOS web components (gaia-components)
+- aws-ui ?
 
+### Future.js
+
+EXAMPLE
+WEB SITE
