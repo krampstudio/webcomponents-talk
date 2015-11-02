@@ -3,7 +3,7 @@
 ## Web development is a hack, semantic is a lie
 
  Developing web site and web app is hard. Perpetual problems:
-  - maintanbility 
+  - maintanbility
   - style consistency
   - 3rd part tools integration
   - productivity
@@ -65,7 +65,7 @@ document.registerElement('x-cow', {
 ```
 <x-cow></x-cow>
 ```
- 
+
  - Extend existing elements
 
 ```js
@@ -122,8 +122,8 @@ for( let cow of document.querySelecotorAll('x-cow')){
 see Object.create and Object.defineProperties
 
 
- - Lifecycle 
- 
+ - Lifecycle
+
 ```js
 const xCowPrototype = Object.create(HTMLElement.prototype);
 xCowPrototype.createdCallback = function(){
@@ -139,12 +139,12 @@ document.registerElement('x-cow', {
 ```
 
  createdCallback, attachedCallback, detachedCallback, attributeChangedCallback
- 
+
 
 ### Shadow dom
 
  - Hide a part of the DOM and scope styles
- 
+
 ```html
 <p id="hostElement"></p>
 <script>
@@ -183,7 +183,7 @@ items.forEach( item => {
 
 ### HTML Import
 
-- Import a part of the DOM and it's assets 
+- Import a part of the DOM and it's assets
 
 ```html
 <link rel="import" href="aComponent.html">
@@ -193,28 +193,28 @@ items.forEach( item => {
 
 -> html countdown
 
-## Early implementation  
+## Early implementations
 
 ### Polymer
 
-- declarative approach 
+- declarative approach
 - polyfill + util + everything is a web component
 
 ### X-tag
 
- - custom element only 
- 
+ - custom element only
+
 ### Bosonic
 
  - 100% w3c then transpiling to old school
- 
+
 ## The hangover
 
-Vendors implementation nightmare
-Google wants HTML imports / Mozilla prefers ES2015 modules
-The polyfills doesn't really work 
-Shadow DOM is difficult to implement (HTML Import even more)
-The reality has caught up the fantasy : React
+ - Vendors implementation nightmare
+ - Google wants HTML imports / Mozilla prefers ES2015 modules
+ - The polyfills doesn't really work
+ - Shadow DOM is difficult to implement (HTML Import even more)
+ - The reality has caught up the fantasy : React
 
 ## A new hope
 
@@ -224,6 +224,14 @@ In the last monthes
 - FirefoxOS web components (gaia-components)
 - aws-ui ?
 
-### Future.js
+### The future starts today
 
+ - [Future.js](http://krampstudio.com/future.js)
 
+## Follow the dealer
+
+```
+          @kramp
+           krampstudio.com
+github.com/krampŝtudio
+```
