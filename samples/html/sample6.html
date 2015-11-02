@@ -1,0 +1,5 @@
+<div class="ng-app">
+    <form ng-submit="saveEdits(todo, 'submit')">
+        <input class="edit" ng-trim="false" ng-model="todo.title" todo-escape="revertEdits(todo)" ng-blur="saveEdits(todo, 'blur')" todo-focus="todo == editedTodo">
+    </form>
+</div>

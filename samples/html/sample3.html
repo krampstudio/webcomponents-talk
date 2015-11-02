@@ -1,0 +1,15 @@
+<STYLE>
+.start {color:yellow; background:navy}
+.end {color:green; background:#ff00ff}
+</STYLE>
+
+<SCRIPT LANGUAGE="javascript">
+function highlightButton(s) {
+if ("INPUT"==event.srcElement.tagName)
+    event.srcElement.className=s
+}
+</SCRIPT>
+
+<FORM NAME=highlight onMouseover="highlightButton('start')" onMouseout="highlightButton('end')">
+    <INPUT TYPE="button" VALUE="Pass Your Mouse Over Me" onClick="location.href='http://www.htmlgoodies.com'">
+</FORM>

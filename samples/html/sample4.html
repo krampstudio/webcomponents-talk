@@ -1,0 +1,11 @@
+<script>
+$(document).ready(function(){
+   for ( var i = 0; i < 10; i++){
+      $('#container').append($('<div class="item" id="item-' + i +'"> Item ' + i + '</div>'));
+   }
+   $('.item').click(function(){
+       alert('Select item ' + $(this).attr('id').replace('item-', ''));
+   });
+});
+</script>
+<div id="container"></div>
